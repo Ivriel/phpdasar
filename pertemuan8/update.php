@@ -7,6 +7,7 @@ $id = $_GET["id"]; // ambil id dari URL
 $mhs= query("SELECT * FROM mahasiswa WHERE id = $id")[0]; // ambil data mahasiswa berdasarkan id
 
 if (isset($_POST['submit'])) { // cek apakah tombol submit sudah ditekan atau belum
+    $_POST['id'] = $id; 
     if (ubah($_POST) > 0) {
         echo "<script>
             alert('Data berhasil diubah!');
@@ -32,28 +33,30 @@ if (isset($_POST['submit'])) { // cek apakah tombol submit sudah ditekan atau be
 
 <body>
     <h1>Update Data Mahasiswa</h1>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $mhs['id']; ?>">
+        <input type="hidden" name="gambarLama" value="<?= $mhs['gambar']; ?>">
         <ul style="list-style-type: none;">
             <li>
                 <label for="nrp">NRP:</label>
-                <input type="text" name="nrp" id="nrp" required value="<?= $mhs["nrp"]; ?>">
+                <input type="text" name="nrp" id="nrp"  value="<?= $mhs["nrp"]; ?>">
             </li>
             <li>
                 <label for="nama">Nama:</label>
-                <input type="text" name="nama" id="nama" required value="<?= $mhs["nama"]; ?>">
+                <input type="text" name="nama" id="nama"  value="<?= $mhs["nama"]; ?>">
             </li>
             <li>
                 <label for="email">Email:</label>
-                <input type="text" name="email" id="email" required value="<?= $mhs["email"]; ?>">
+                <input type="text" name="email" id="email"  value="<?= $mhs["email"]; ?>">
             </li>
             <li>
                 <label for="jurusan">Jurusan:</label>
-                <input type="text" name="jurusan" id="jurusan" required value="<?= $mhs["jurusan"]; ?>">
+                <input type="text" name="jurusan" id="jurusan"  value="<?= $mhs["jurusan"]; ?>">
             </li>
             <li>
                 <label for="gambar">Gambar:</label>
-                <input type="text" name="gambar" id="gambar" required value="<?= $mhs["gambar"]; ?>">
+                <img src="<?= $mhs['gambar']; ?>" width="50" height="50" alt="Current Image">
+                <input type="file" name="gambar" id="gambar">
             </li>
             <li>
                 <button type="submit" name="submit">Ubah Data</button>

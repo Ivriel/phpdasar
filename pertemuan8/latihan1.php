@@ -1,6 +1,10 @@
 <?php
 require 'functions.php';
-$mahasiswa = query("SELECT * FROM mahasiswa");
+$mahasiswa = query("SELECT * FROM mahasiswa"); // ambil data mahasiswa berdasarkan id
+
+if (isset($_GET["cari"])) {
+    $mahasiswa = find($_GET["keyword"]);
+}
 
 // ambil data dari object result (fetch)
 // mysqli_fetch_row()
@@ -18,6 +22,11 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
 </head>
 <body>
 <a href="tambah.php">Tambah data mahasiswa</a>
+<br/>
+<form action="" method="get">
+    <input type="text" name="keyword" placeholder="cari mahasiswa" autofocus autocomplete="off">
+    <button type="submit" name="cari">Cari!</button>
+</form>
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>No.</th>
